@@ -1,0 +1,73 @@
+2012-09-27  Werner Koch  <wk@gnupg.org>
+
+	Release 1.3.0.
+	* configure.ac: Set LT version to C19/A11/R1.
+
+2012-09-26  Werner Koch  <wk@gnupg.org>
+
+	Update build helper scripts.
+	* config.guess, config.sub: Update to version 2012-07-31.
+	* ltmain.sh: Update to version 2.4.2.
+	* install-sh, m4/libtool.m4, m4/ltoptions.m4, m4/ltversion.m4
+	* m4/lt~obsolete.m4: Update to autoconf 2.69 versions.
+
+	Adjust for stricter autoconf requirements.
+	* configure.ac: Fix usage of AC_LANG_PROGRAM.
+
+	Do not distribute a copy of gitlog-to-changelog.
+	* Makefile.am (AUTOMAKE_OPTIONS): Do not create a tar.gz.
+	(gen-ChangeLog): Require an installed gitlog-to-changelog.
+	* build-aux/gitlog-to-changelog: Remove.
+
+	Allow building with w64-mingw32.
+	* autogen.sh <--build-w32>: Support the w64-mingw32 toolchain.  Also
+	prepare for 64 bit building.
+
+	Switch to the new automagic beta numbering scheme.
+	* configure.ac: Add all the required m4 magic.
+
+	Change library license to LGPLv3+/GPLv2+.
+	* COPYING.GPLv2, COPYING.GPLv3, COPYING.LGPLv3: New.
+	* COPYING: Replace text by a reference to the new files.
+	* AUTHORS: Update copyright, license, and maintainer information.
+	* Makefile.am (EXTRA_DIST): Distribute the new files.
+
+	Remove unused or useless files.
+	* src/asn1-parse.h: Remove empty file.
+	* src/asn1-parse.y: Do not include asn1-parse.h.
+
+2011-12-06  Werner Koch  <wk@gnupg.org>
+
+	Allow to set subject and issuer.
+	* src/certreq.c (ksba_certreq_set_issuer): Do not check the subject.
+
+2011-12-01  Werner Koch  <wk@gnupg.org>
+
+	Post release updates.
+
+	Generate the ChangeLog from commit logs.
+	* build-aux/gitlog-to-changelog: New script.  Taken from gnulib.
+	* build-aux/git-log-fix: New file.
+	* build-aux/git-log-footer: New file.
+	* doc/HACKING: New file.
+	* ChangeLog: New file.
+	* Makefile.am (EXTRA_DIST): Add new files.
+	(gen-ChangeLog): New.
+	(dist-hook): Run gen-ChangeLog.
+	* autogen.sh: Install commit-msg hook for git.
+
+	Rename all ChangeLog files to ChangeLog-2011.
+
+2011-12-01  Werner Koch  <wk@gnupg.org>
+
+	NB: Changes done before December 1st, 2011 are described in
+	per directory files named ChangeLog-2011.  See doc/HACKING for
+	details.
+
+        -----
+	Copyright (C) 2011 g10 Code GmbH
+
+	Copying and distribution of this file and/or the original GIT
+	commit log messages, with or without modification, are
+	permitted provided the copyright notice and this notice are
+	preserved.

@@ -30,5 +30,6 @@ AC_CHECK_HEADERS([openssl/ssl.h])
 # OUTPUT
 AC_CONFIG_FILES([Makefile])
 AC_CONFIG_FILES([debug/Makefile])
+AC_CONFIG_FILES([utils/Makefile])
 
 AC_OUTPUT

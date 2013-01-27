@@ -1,0 +1,117 @@
+.\" Created from Texinfo source by yat2m 1.0
+.TH SYMCRYPTRUN 1 2013-01-27 "GnuPG 2.0.19" "GNU Privacy Guard"
+.SH NAME
+.B symcryptrun
+\- Call a simple symmetric encryption tool
+.SH SYNOPSIS
+.B  symcryptrun
+.B \-\-class
+.I class
+.B \-\-program
+.I program
+.B \-\-keyfile
+.I keyfile
+.RB [ --decrypt | --encrypt ]
+.RI [ inputfile ]
+
+.SH DESCRIPTION
+Sometimes simple encryption tools are already in use for a long time and
+there might be a desire to integrate them into the GnuPG framework.  The
+protocols and encryption methods might be non-standard or not even
+properly documented, so that a full-fledged encryption tool with an
+interface like gpg is not doable.  \fBsymcryptrun\fR provides a
+solution: It operates by calling the external encryption/decryption
+module and provides a passphrase for a key using the standard
+\fBpinentry\fR based mechanism through \fBgpg-agent\fR.
+
+Note, that \fBsymcryptrun\fR is only available if GnuPG has been
+configured with \(aq--enable-symcryptrun\(aq at build time.
+
+
+
+For encryption, the plain text must be provided on STDIN or as the
+argument \fIinputfile\fR, and the ciphertext will be output to STDOUT.
+For decryption vice versa.
+
+\fICLASS\fR describes the calling conventions of the external tool.
+Currently it must be given as \(aqconfucius\(aq.  \fIPROGRAM\fR is
+the full filename of that external tool.
+
+For the class \(aqconfucius\(aq the option \fB--keyfile\fR is
+required; \fIkeyfile\fR is the name of a file containing the secret key,
+which may be protected by a passphrase.  For detailed calling
+conventions, see the source code.
+
+
+Note, that \fBgpg-agent\fR must be running before starting
+\fBsymcryptrun\fR.
+
+
+The following additional options may be used:
+
+.TP
+.B  -v
+.TP
+.B  --verbose
+Output additional information while running.
+
+.TP
+.B  -q
+.TP
+.B  --quiet
+Try to be as quiet as possible.
+
+.TP
+.B  --homedir \fIdir\fR
+Set the name of the home directory to \fIdir\fR. If this option is not
+used, the home directory defaults to \(oq\fI~/.gnupg\fR\(cq.  It is only
+recognized when given on the command line.  It also overrides any home
+directory stated through the environment variable \(oq\fIGNUPGHOME\fR\(cq or
+(on W32 systems) by means of the Registry entry
+\fIHKCU\\Software\\GNU\\GnuPG:HomeDir\fR.
+
+
+
+.TP
+.B  --log-file \fIfile\fR
+Append all logging output to \fIfile\fR.  Default is to write logging
+information to STDERR.
+
+
+
+The possible exit status codes of \fBsymcryptrun\fR are:
+
+.TP
+.B  0
+        Success.
+.TP
+.B  1
+        Some error occured.
+.TP
+.B  2
+        No valid passphrase was provided.
+.TP
+.B  3
+        The operation was canceled by the user.
+
+
+.SH SEE ALSO
+\fBgpg\fR(1),
+\fBgpgsm\fR(1),
+\fBgpg-agent\fR(1),
+
+The full documentation for this tool is maintained as a Texinfo manual.
+If GnuPG and the info program are properly installed at your site, the
+command
+
+.RS 2
+.nf
+info gnupg
+.fi
+.RE
+
+should give you access to the complete manual including a menu structure
+and an index.
+
+
+

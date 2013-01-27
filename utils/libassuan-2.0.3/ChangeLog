@@ -1,0 +1,51 @@
+2011-12-20  Werner Koch  <wk@gnupg.org>
+
+	Release version 2.0.3.
+	* configure.ac: Bump LT version to C3/A3/R0.
+
+	Update gitlog-to-changelog to support --tear-off.
+
+2011-12-13  Werner Koch  <wk@gnupg.org>
+
+	Fix assuan_get_pid for pipe servers.
+	At some point in the past we introduced a regression in that the
+	client of a pipe server received its own pid and not the pid of
+	the server.
+
+	* src/assuan-pipe-connect.c (struct at_pipe_fork)
+	(struct at_socketpair_fork): Add PARENT_PID.
+	(at_pipe_fork_cb, at_socketpair_fork): Use PARENT_PID instead of getpid.
+	(pipe_connect, socketpair_connect): Set PARENT_PID.
+
+	vasprintf.c: Improve test code.
+	* src/vasprintf.c (checkit): Set flag for a test failure.
+	(main): Return error on any failure.
+
+2011-12-01  Werner Koch  <wk@gnupg.org>
+
+	Generate the ChangeLog from commit logs.
+	* build-aux/gitlog-to-changelog: New script.  Taken from gnulib.
+	* build-aux/git-log-fix: New file.
+	* build-aux/git-log-footer: New file.
+	* doc/HACKING: New file.
+	* ChangeLog: New file.
+	* Makefile.am (EXTRA_DIST): Add new files.
+	(gen-ChangeLog): New.
+	(dist-hook): Run gen-ChangeLog.
+	* autogen.sh: Install commit-msg hook for git.
+
+	Rename all ChangeLog files to ChangeLog-2011.
+
+2011-12-01  Werner Koch  <wk@gnupg.org>
+
+	NB: Changes done before December 1st, 2011 are described in
+	per directory files named ChangeLog-2011.  See doc/HACKING for
+	details.
+
+        -----
+	Copyright (C) 2011 Free Software Foundation, Inc.
+
+	Copying and distribution of this file and/or the original GIT
+	commit log messages, with or without modification, are
+	permitted provided the copyright notice and this notice are
+	preserved.
