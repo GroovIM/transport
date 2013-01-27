@@ -1,0 +1,39 @@
+------------------------------------------------------------------------------
+                                 GroovIM
+------------------------------------------------------------------------------
+============
+Introduction
+============
+  GroovIM is a secure instance message client.
+
+========================
+Compilation Instructions
+========================
+  The simplest way to compile this package is:
+
+  1.  Type `cd ' to the directory containing the source code.
+
+  2.  If there are no `configure' shell script in the directory, type
+      `./autogen.sh' to generate `configure' script.
+
+  3.  Type `./configure` to configure the package for your system. See INSTALL
+      for more details.
+      ./configure --prefix=${GROOVIM_INSTALL}
+
+  5.  Type `make` to compile the package
+
+  6.  Type `make install` to install the package into your system.
+
+  7.  ${GROOVIM_INSTALL}/bin/groovim is the linker binary
+
+===================
+Directory Structure
+===================
+README               - this document
+Makefile.am          - input of automake
+configure.ac         - input of autoconf
+src/                 - source code of verification tool
+include/             - include file, exported interface
+lib/                 - source code of exported interface
+debug/               - placeholder of object files which are compiled for debugging
+optimized/           - placeholder of object files which are compiled for optimization
