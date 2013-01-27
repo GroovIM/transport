@@ -3,33 +3,41 @@
 LIBRARIES_PATH=$1
 PREFIX=$2
 
-PTH_PATH=${LIBRARIES_PATH}/pth-2.0.7
-LIBASSUAN_PATH=${LIBRARIES_PATH}/libassuan-2.0.3
-KSBA_PATH=${LIBRARIES_PATH}/libksba-1.3.0 
-GNUPG_PATH=${LIBRARIES_PATH}/gnupg-2.0.19
+PTH_PATH=pth-2.0.7
+LIBASSUAN_PATH=libassuan-2.0.3
+KSBA_PATH=libksba-1.3.0 
+GNUPG_PATH=gnupg-2.0.19
 
 function build_pth
 {
-  ${PTH_PATH}/configure --prefix=${PREFIX}
-	make all install -C ${PTH_PATH}
+  mkdir ${PTH_PATH} && cd ${PTH_PATH}
+  ../${LIBRARIES_PATH}/${PTH_PATH}/configure --prefix=${PREFIX}
+	make all install -C ../${LIBRARIES_PATH}/${PTH_PATH}
+  cd ..
 }
 
 function build_libassuan
 {
-  ${LIBASSUAN_PATH}/configure --prefix=${PREFIX}
-	make all install -C ${LIBASSUAN_PATH}
+  mkdir ${LIBASSUAN_PATH} && cd ${LIBASSUAN_PATH}
+  ../${LIBRARIES_PATH}/${LIBASSUAN_PATH}/configure --prefix=${PREFIX}
+	make all install -C ../${LIBRARIES_PATH}/${LIBASSUAN_PATH}
+  cd ..
 }
 
 function build_ksba
 {
-  ${KSBA_PATH}/configure --prefix=${PREFIX}
-  make all install -C ${KSBA_PATH}
+  mkdir ${KSBA_PATH} && cd ${KSBA_PATH}
+  ../${LIBRARIES_PATH}/${KSBA_PATH}/configure --prefix=${PREFIX}
+  make all install -C ../${LIBRARIES_PATH}/${KSBA_PATH}
+  cd ..
 }
 
 function buid_gnupg
 {
-  ${GNUPG_PATH}/configure --prefix=${PREFIX} --with-libassuan-prefix=${LIBASSUAN_PATH} --with-ksba-prefix=${KSBA_PATH} --with-pth-prefix=${PTH_PATH}
-	make all install -C ${GNUPG_PATH}
+	mkdir ${GNUPG_PATH} && cd ${GNUPG_PATH}
+  ${LIBRARIES_PATH}/${GNUPG_PATH}/configure --prefix=${PREFIX} --with-libassuan-prefix=${LIBRARIES_PATH}/${LIBASSUAN_PATH} --with-ksba-prefix=${LIBRARIES_PATH}/${KSBA_PATH} --with-pth-prefix=${LIBRARIES_PATH}/${PTH_PATH}
+	make all install -C ../${LIBRARIES_PATH}/${GNUPG_PATH}
+  cd ..
 }
 
 build_pth
